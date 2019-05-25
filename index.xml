@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE rfc PUBLIC "-//IETF//DTD RFC 2629//EN" "https://xml2rfc.tools.ietf.org/authoring/rfc2629.dtd" [
+  <!ENTITY rfc2119 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+  <!ENTITY rfc5646 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5646.xml">
+]>
+<?xml-stylesheet type='text/xsl' href='rfc2629.xsl' ?>
+
+<?rfc strict="yes" ?>
+<?rfc toc="yes"?>
+<?rfc tocdepth="4"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes" ?>
+<?rfc compact="yes" ?>
+<?rfc subcompact="no" ?>
+
+<rfc category="info" docName="draft-msporny-d-langtag-ext-00"
+     ipr="trust200902" submissionType="independent">
+  <front>
+    <title abbrev="BCP 47 Text Direction">BCP 47 Extension D</title>
+
+    <author fullname="Manu Sporny" initials="M.S." surname="Sporny">
+      <organization>Digital Bazaar</organization>
+      <address>
+        <email>msporny@digitalbazaar.com</email>
+      </address>
+    </author>
+
+    <!-- Meta-data Declarations -->
+    <date month="May" year="2019" />
+    <area>General</area>
+    <workgroup>Internet Engineering Task Force</workgroup>
+    <keyword>locale</keyword>
+    <keyword>bcp 47</keyword>
+    <abstract>
+      <t>
+This document specifies an Extension to BCP 47 which provides subtags that
+specify language direction.
+      </t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section title="Introduction">
+      <t>
+<xref target="RFC5646" ></xref> permits the definition and registration of
+language tag extensions "that contain a language component and are compatible
+with applications that understand language tags". This document defines an
+extension for identifying text direction using language tags. The "singleton"
+identifier for this extension is 'd'.
+      </t>
+
+      <section title="Requirements Language">
+        <t>
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+"SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+document are to be interpreted as described in RFC 2119.
+        </t>
+      </section>
+    </section>
+
+    <?rfc needLines="8" ?>
+
+    <section title="RFC5646 Required Information">
+      <t>
+Language tags, as defined by <xref target="RFC5646"></xref>, are useful for
+identifying the language of content. Some operating environments also
+use the language tag to determine text direction, which can be problematic.
+This extension provides a mechanism for explicitly stating the direction
+of a specific language-tagged string.
+      </t>
+
+      <section title="Summary">
+        <t>
+The subtags available for use in the 'd' extension consist of the values
+'ltr', 'rtl', and 'auto' for expressing text direction that is "left-to-right",
+"right-to-left", and "automatically detected", respectively.
+        </t>
+        <t>
+For example, the language tag "ar-d-rtl" consists of:
+          <list style="symbols">
+            <t>
+The base language tag "ar" (Arabic), exactly as defined by
+<xref target="RFC5646"  />.
+            </t>
+            <t>
+The singleton 'd', identifying this extension.
+            </t>
+            <t>
+The attribute 'rtl', which specifies a direction of "right to left".
+            </t>
+          </list>
+        </t>
+        <t>
+Only the first occurrence of an attribute or key conveys meaning in a language
+tag. When interpreting tags containing the direction extension, duplicate
+attributes or keywords are ignored in the following way: ignore any attribute
+that has already appeared in the tag and ignore any keyword whose key has already
+occurred in the tag.
+         </t>
+         <section title="Canonicalization" anchor="canonicalization">
+           <t>
+As required by <xref target="RFC5646"  />, the use of uppercase or lowercase
+letters is not significant in the subtags used in this extension. The
+canonical form for all subtags in the extension is lowercase.
+The canonical order of attributes is in <xref target="US-ASCII" />
+order (that is, numbers before letters, with letters sorted as lowercase
+US-ASCII code points). The canonical order of keywords is in
+<xref target="US-ASCII" /> order by key. The order of subtags within a keyword
+is significant; the meaning of this extension is altered if those subtags
+are rearranged. Thus, the canonical form of the extension never reorders the
+subtags within a keyword.
+           </t>
+         </section>
+      </section>
+
+      <section title="Registration Form" anchor="regform">
+        <t>
+Per <xref target="RFC5646" >RFC 5646, Section 3.7</xref>:
+        </t>
+        <figure><artwork>%%
+Identifier: d
+Description: Text Direction
+Comments: Subtags for the identification of language direction. Used to
+    influence input mechanisms and graphical rendering.
+Added: 2019-05-25
+RFC: [TBD]
+Authority:     Manu Sporny
+Contact_Email: msporny@digitalbazaar.com
+Mailing_List:  public-credentials@w3.org
+URL: https://www.w3.org/2017/vc/WG/
+%%</artwork></figure>
+
+      </section>
+    </section>
+
+    <section anchor="Acknowledgements" title="Acknowledgements">
+      <t>
+Thanks to Dan Burnett, Charles "chaals" Nevile, Dave Longley, Ivan Herman,
+Rob Sanderson, Richard Ishida, Addison Philips, Benjamin Young, Ivan Herman,
+Pierre-Antoine Champin, and Eric Prud'hommeaux for the discussion that led
+to this specification.
+      </t>
+    </section>
+
+    <section anchor="IANA" title="IANA Considerations">
+      <t>
+This document will require IANA to insert the record in
+<xref target="regform"></xref> into the Language Extensions Registry, according
+to Section 3.7. Extensions and the Extensions Registry of "Tags for Identifying
+Languages" in <xref target="RFC5646" ></xref>.
+      </t>
+      <t>
+This document does not require IANA to create or maintain a new registry or
+otherwise impact IANA.
+      </t>
+    </section>
+
+    <section anchor="Security" title="Security Considerations">
+      <t>
+The security considerations for this extension are the same as those for
+<xref target="RFC5646" ></xref>. See <xref target="RFC5646" >RFC 5646, Section 6,
+Security Considerations</xref>.
+      </t>
+    </section>
+  </middle>
+
+  <back>
+    <references title="Normative References">
+      <reference anchor="US-ASCII">
+				<front>
+					<title>ISO/IEC 646:1991, Information technology -- ISO 7-bit coded character set for information interchange. </title>
+					<author>
+						<organization>International Organization for Standardization</organization>
+					</author>
+					<date year="1991"/>
+					<abstract>
+						<t>This standard defines an International Reference Version (IRV) which corresponds exactly to what is widely known as ASCII or US-ASCII. ISO/IEC 646 was based on the earlier standard ECMA-6. ECMA has maintained its standard up to date with respect to ISO/IEC 646 and makes an electronic copy available at http://www.ecma-international.org/publications/standards/Ecma-006.htm. ISO/IEC 646 JTC 1/SC 2</t>
+					</abstract>
+				</front>
+		  </reference>
+      &rfc5646;
+    </references>
+  </back>
+</rfc>
